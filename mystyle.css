@@ -445,7 +445,6 @@ body.scrolled .back-to-top {
   z-index: 1;
   left: 30px;
   border: medium solid white;
-  border-width: 10px 10px 10px 0;
   border-color: transparent white transparent transparent;
 }
 
