@@ -502,3 +502,47 @@ body.scrolled .back-to-top {
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
+
+
+main {
+  padding: 20px;
+}
+
+.search {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 200px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #0090d1;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0a648d;
+}
+
+.company-data,
+.news,
+.sec-filings {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+#stock-chart {
+  width: 100%;}
