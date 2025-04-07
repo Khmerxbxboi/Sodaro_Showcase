@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sodaro Preview: Market Sentiment & Stock Analysis</title>
-  
-  <link href="mystyle.css" rel="stylesheet" type="text/css" />
+  <title>Sodaro 0.5 Demo: Market Sentiment & Stock Analysis</title>
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Libraries -->
+
+  <link href="mystyle.css" rel="stylesheet" type="text/css" />
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sentiment@5.0.1/lib/sentiment.min.js"></script>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
@@ -19,25 +21,55 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix"></script>
+
 </head>
 
 <body>
-  <div class="container">
-    <header class="hero">
-      <h1>Sodaro 0.5 DEMO</h1>
-      <p>Market Sentiment & Stock Analysis Powered by Behavior & AI</p>
-      
-      <script src="app006.js"></script>
-      <canvas id="heatmapCanvas"></canvas>
+    <div class="container">
+      <header class="hero">
+        <h1>Sodaro 0.5 DEMO</h1>
+        <p>Market Sentiment & Stock Analysis Powered by Behavior and AI. Demo Test Featuring Large-Cap Stocks like AAPL (Apple) and SPY.
+            Stock information will be displayed at the bottom of the page. Still working on fixing this display error.</p>
+        <canvas id="heatmapCanvas" width="800" height="600"></canvas>
+      </header>
+  
+      <main>
+        <a href="index.html" class="demo-button">⬅ Back to Main</a>
 
-    </header>
-
-    <main>
-
-      <a href="index.html" class="demo-button">⬅ Back to Main</a>
-    </main>
-  </div>
-
-
-</body>
+        <script src="app006.js"></script>
+  
+        <section id="yahoo-news">
+          <h2>📢 Live Yahoo Finance News</h2>
+          <ul id="news-feed">
+            <li>Loading news...</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+    <script>
+      const newsFeed = document.getElementById("news-feed");
+  
+      async function fetchYahooNews() {
+        const rssURL = "https://feeds.finance.yahoo.com/rss/2.0/headline?s=AAPL,MSFT,GOOG,TSLA&region=US&lang=en-US";
+        const apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssURL)}`;
+  
+        try {
+          const response = await fetch(apiURL);
+          const data = await response.json();
+  
+          if (data.status === "ok") {
+            newsFeed.innerHTML = data.items.slice(0, 5).map(item => `
+              <li><a href="${item.link}" target="_blank">${item.title}</a></li>
+            `).join("");
+          } else {
+            newsFeed.innerHTML = "<li>Unable to load news.</li>";
+          }
+        } catch (err) {
+          console.error(err);
+          newsFeed.innerHTML = "<li>Error fetching news.</li>";
+        }
+      }
+  
+      fetchYahooNews();
+    </script>
 </html>
