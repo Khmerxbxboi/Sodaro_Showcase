@@ -1,0 +1,181 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bulli Sot - About Me</title>
+
+  <!-- Clean Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #f9f9fb;
+      color: #1a1a1a;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .wrapper {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .profile-card {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+
+    .profile-image {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
+    }
+
+    .content {
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .bio {
+      font-size: 1.1rem;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    strong {
+      color: #000;
+    }
+
+    .chart-container {
+      margin-top: 3rem;
+    }
+
+    #lineChart {
+      width: 100%;
+      max-width: 800px;
+      height: 300px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+  background-color: #0090d1;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="wrapper">
+    <div class="profile-card">
+      <img src="images/image1.jpg" alt="Bulli Sot portrait" class="profile-image" />
+
+      <div class="content">
+        <h1>Bullimalinna Sot</h1>
+        <h2>Creative Technologist · Oakland Raised · Start-up Founder</h2>
+        <div class="bio">
+          <p>
+            Hey, I’m Bulli — a bold mind blending art, tech, and culture. I'm a Master’s student at CSUEB in Interaction Design & Interactive Art, and the founder of <strong>Sodaro</strong>, an AI-powered platform designed to break barriers in financial literacy for urban youth.
+          </p>
+          <p>
+            Whether I’m designing, trying to get more certificates, breakdancing or building AI tools that track market vibes, everything I do reflects my mission: to make innovation feel local, real, and empowering. Let’s reimagine finance, tech, and identity—together.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h2 style="text-align:center; margin-bottom: 1rem;">My Growth Journey</h2>
+      <canvas id="lineChart"></canvas>
+    </div>
+
+
+    <div style="text-align: center;">
+      <a href="index.html" class="back-button">← Back to Sodaro</a>
+    </div>
+  </section>
+
+
+  <script>
+    const ctx = document.getElementById('lineChart').getContext('2d');
+    const lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'Learning & Impact',
+          data: [10, 20, 30, 50, 70, 90],
+          borderColor: '#1a1a1a',
+          backgroundColor: 'rgba(0,0,0,0.05)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
