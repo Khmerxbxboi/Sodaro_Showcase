@@ -28,11 +28,11 @@
     </div>
       </header>
   
-    <div class="image-section">
-      <img src="images/image1.jpg" alt="Bulli Sot portrait" class="fade-in">
-      <img src="images/image2.jpg" alt="Workstation with project on screen" class="fade-in">
-      <img src="images/image3.png" alt="Certificate and coding progress"class="fade-in">
-    </div>
+      <div class="image-section">
+        <img src="images/image1.jpg" alt="Bulli Sot portrait" class="fade-in img-click" data-link="bulli.html">
+        <img src="images/image2.jpg" alt="Workstation with project on screen" class="fade-in img-click" data-link="page2.html">
+        <img src="images/image3.png" alt="Certificate and coding progress" class="fade-in img-click">
+      </div>
     
   
     <nav>
@@ -267,6 +267,35 @@
     appearOnScroll.observe(fader);
   });
 </script>
+
+<script>
+  // Toggle dropdowns on mobile
+  document.addEventListener('DOMContentLoaded', function () {
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach(drop => {
+      drop.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.classList.toggle('open');
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  document.querySelectorAll('.img-click').forEach(img => {
+    img.style.cursor = 'pointer'; // optional, makes it look clickable
+    img.addEventListener('click', function () {
+      const url = this.getAttribute('data-link');
+      // You can add animation here if you want before redirecting
+      window.location.href = url;
+    });
+  });
+</script>
+
+
   </body>
   </html>
   
