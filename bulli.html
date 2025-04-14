@@ -1,11 +1,11 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bulli Sot - About Me</title>
 
-  <!-- Clean Google Font -->
+  <!-- Font and Chart.js -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -82,10 +82,6 @@
       line-height: 1.8;
     }
 
-    strong {
-      color: #000;
-    }
-
     .chart-container {
       margin-top: 3rem;
     }
@@ -100,7 +96,7 @@
       display: inline-block;
       margin-top: 2rem;
       padding: 0.75rem 1.5rem;
-  background-color: #0090d1;
+      background-color: #0090d1;
       color: #fff;
       text-decoration: none;
       border-radius: 6px;
@@ -127,7 +123,7 @@
             Hey, I’m Bulli — a bold mind blending art, tech, and culture. I'm a Master’s student at CSUEB in Interaction Design & Interactive Art, and the founder of <strong>Sodaro</strong>, an AI-powered platform designed to break barriers in financial literacy for urban youth.
           </p>
           <p>
-            Whether I’m designing, trying to get more certificates, breakdancing or building AI tools that track market vibes, everything I do reflects my mission: to make innovation feel local, real, and empowering. Let’s reimagine finance, tech, and identity—together.
+            Whether I’m designing, getting certificates, breakdancing, or building AI tools that track market vibes — everything I do reflects my mission: to make innovation feel local, real, and empowering.
           </p>
         </div>
       </div>
@@ -138,32 +134,54 @@
       <canvas id="lineChart"></canvas>
     </div>
 
-
     <div style="text-align: center;">
       <a href="index.html" class="back-button">← Back to Sodaro</a>
     </div>
   </section>
 
-
   <script>
     const ctx = document.getElementById('lineChart').getContext('2d');
+
+    const milestones = {
+      2007: "Bought my first stock while working at a company $ODP",
+      2012: "Joined first startup, learned market analytics",
+      2014: "Studied emotional behavior in market decision-making",
+      2019: "Started dreaming of Sodaro",
+      2020: "COVID era – dove into UX & behavioral finance",
+      2021: "Self-funded swing trading with handwritten strategies",
+      2022: "Initial idea & inspiration for Sodaro",
+      2023: "Applied to CSUEB, attended DVC for design momentum",
+      2024: "Entered CSUEB Grad Program, learned JS & APIs",
+      2025: "Launching thesis — Sodaro is here!"
+    };
+
     const lineChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        labels: Object.keys(milestones),
         datasets: [{
           label: 'Learning & Impact',
-          data: [10, 20, 30, 50, 70, 90],
+          data: [10, 15, 25, 35, 45, 55, 65, 75, 85, 100],
           borderColor: '#1a1a1a',
           backgroundColor: 'rgba(0,0,0,0.05)',
           borderWidth: 2,
           fill: true,
-          tension: 0.4
+          tension: 0.4,
+          pointRadius: 6,
+          pointHoverRadius: 8
         }]
       },
       options: {
         responsive: true,
         plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const year = context.label;
+                return milestones[year] || '';
+              }
+            }
+          },
           legend: {
             display: false
           }

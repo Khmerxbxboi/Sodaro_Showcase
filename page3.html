@@ -1044,43 +1044,60 @@
     });
   </script>
 
+
 <script>
-  async function fetchCountryData(countryCode, tooltipElement) {
-  tooltipElement.textContent = `Loading info for ${countryCode}...`;
+  const tooltip = document.getElementById("tooltip");
 
-  try {
-    // 📰 News
-    const newsRes = await fetch(`https://gnews.io/api/v4/search?q=${countryCode}&lang=en&country=${countryCode.toLowerCase()}&max=1&token=f8c8aa339e21256e484ab7ca1c2d0299`);
-    const newsData = await newsRes.json();
-    const headline = newsData.articles?.[0]?.title || "No news available";
+  document.querySelectorAll('path, polygon').forEach(country => {
+    if (country.id.length === 2 || country.classList.contains('country')) {
+      country.classList.add('country');
+      country.addEventListener('mouseover', async () => {
+        const countryCode = country.id;
+        tooltip.textContent = `Loading info for ${countryCode}...`;
 
-    // 💱 Currency Exchange Rate
-    const currencyRes = await fetch(`https://api.exchangerate.host/latest?base=${countryCode}`);
-    const currencyData = await currencyRes.json();
-    const usdRate = currencyData.rates?.USD
-      ? `1 ${countryCode} = ${currencyData.rates.USD.toFixed(2)} USD`
-      : "Currency data unavailable";
+        try {
+          // 📰 GNews (active)
+          const newsRes = await fetch(`https://gnews.io/api/v4/search?q=${countryCode}&lang=en&country=${countryCode.toLowerCase()}&max=1&token=f8c8aa339e21256e484ab7ca1c2d0299`);
+          const newsData = await newsRes.json();
+          const headline = newsData.articles?.[0]?.title || "No news available";
 
-    // 🌤️ Weather
-    const weatherCountry = countryCode.toLowerCase();
-    const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${weatherCountry}&appid=YOUR_OPENWEATHERMAP_KEY&units=imperial`);
-    const weatherData = await weatherRes.json();
-    const weather = weatherData?.main
-      ? `${Math.round(weatherData.main.temp)}°F ${weatherData.weather[0].main}`
-      : "Weather not available";
+          // 💱 Currency (placeholder – ExchangeRate API)
+          const currencyRes = await fetch(`https://api.exchangerate.host/latest?base=${countryCode}`);
+          const currencyData = await currencyRes.json();
+          const usdRate = currencyData.rates?.USD
+            ? `1 ${countryCode} = ${currencyData.rates.USD.toFixed(2)} USD`
+            : "Currency unavailable";
 
-    // 🧠 Combined Output
-    const combined = `
+          // 🌤️ Weather (plug in your OpenWeatherMap API key below ↓)
+          const weatherCountry = countryCode.toLowerCase();
+          const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${weatherCountry}&appid=YOUR_OPENWEATHERMAP_KEY&units=imperial`);
+          const weatherData = await weatherRes.json();
+          const weather = weatherData?.main
+            ? `${Math.round(weatherData.main.temp)}°F, ${weatherData.weather[0].main}`
+            : "Weather unavailable";
+
+          // 🧠 Final Tooltip
+          tooltip.textContent = `
 ${countryCode} 🌍
-${usdRate}
-Weather: ${weather}
-Headline: ${headline}
-    `;
-    tooltipElement.textContent = combined.trim();
-  } catch (err) {
-    tooltipElement.textContent = `${countryCode}: Error fetching data`;
-  }
+📈 ${usdRate}
+🌤️ Weather: ${weather}
+📰 ${headline}
+          `.trim();
+        } catch (err) {
+          tooltip.textContent = `${countryCode}: Error fetching data`;
+        }
+      });
+    }
+  });
+</script>
+<script>
+  async function fetchSodaroNews(country) {
+  const url = `https://gnews.io/api/v4/search?q=${country}&lang=en&country=${country.toLowerCase()}&max=1&token=${apiKeySEC}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.articles?.[0]?.title || "No news available.";
 }
+</script>
 </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ let emotion = "Neutral";
 let priceChange = 0;
 let apiKeyAlpha = "KOBZHNP6BO8K3L8O";
 let apiKeyNews = "32pbV7NhyfGPZ1rHTVlOa43g8HmLfQd1XXOqKCOY";
-let apiKeySEC = "YOUR_SEC_API_KEY";
+let apiKeySEC = "f8c8aa339e21256e484ab7ca1c2d0299";
 let newsData = [];
 let macroNewsData = []; // New: Macro news array
 let stockHistory = [];
@@ -143,14 +143,19 @@ function fetchStockFromAPI(symbol) {
 }
 
 function fetchNewsFromAPI(symbol) {
-  let newsURL = `https://newsapi.org/v2/everything?q=${symbol}&apiKey=${apiKeyNews}`;
+  const companyName = getCompanyNameFromSymbol(symbol);
+  const encodedName = encodeURIComponent(`"${companyName}"`);
+  const newsURL = `https://newsapi.org/v2/everything?q=${encodedName}&sortBy=publishedAt&language=en&apiKey=${apiKeyNews}`;
 
   fetch(newsURL)
     .then(response => response.json())
     .then(data => {
-      if (data.articles) {
+      if (data.articles && data.articles.length > 0) {
         newsData = data.articles.slice(0, 5);
         generateNewsExplanation();
+      } else {
+        newsData = [];
+        sentimentText += ` No recent news found for ${companyName}.`;
       }
     })
     .catch(error => {
@@ -305,3 +310,47 @@ function drawStockChart() {
     line(prevX, prevY, currX, currY);
   }
 }
+
+async function fetchSodaroNews(country) {
+  const url = `https://gnews.io/api/v4/search?q=${country}&lang=en&country=${country.toLowerCase()}&max=1&token=${apiKeySEC}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.articles?.[0]?.title || "No news available.";
+}
+
+function fetchNewsFromAPI(symbol) {
+  const companyName = getCompanyNameFromSymbol(symbol); // We'll define this below
+  const newsURL = `https://newsapi.org/v2/everything?q=${companyName}&sortBy=publishedAt&language=en&apiKey=${apiKeyNews}`;
+
+  fetch(newsURL)
+    .then(response => response.json())
+    .then(data => {
+      if (data.articles) {
+        newsData = data.articles.slice(0, 5);
+        generateNewsExplanation();
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching news:", error);
+      newsData = [];
+    });
+}
+
+function getCompanyNameFromSymbol(symbol) {
+  const mapping = {
+    "AAPL": "Apple",
+    "MSFT": "Microsoft",
+    "GOOG": "Google",
+    "GOOGL": "Alphabet",
+    "AMZN": "Amazon",
+    "TSLA": "Tesla",
+    "META": "Meta Platforms",
+    "NFLX": "Netflix",
+    "NVDA": "NVIDIA",
+    // Add more as needed
+  };
+
+  return mapping[symbol] || symbol; // fallback to symbol if not found
+}
+
+const newsURL = `https://newsapi.org/v2/everything?q="${companyName}"&sortBy=publishedAt&language=en&apiKey=${apiKeyNews}`;
