@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sodaro Intelligence API</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #e0f7ff;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      background-color: rgba(0, 207, 255, 0.1);
+      border: 1px solid #00cfff;
+      border-radius: 8px;
+      color: #00cfff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: rgba(0, 207, 255, 0.2);
+      box-shadow: 0 0 10px #00cfff88;
+    }
+
+    .pulse-container {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .orb {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #00cfff, #006b9c);
+      border-radius: 50%;
+      margin: auto;
+      box-shadow: 0 0 20px #00cfff;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 20px #00cfff, 0 0 40px rgba(0, 207, 255, 0.5);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 30px #00cfff, 0 0 60px rgba(0, 207, 255, 0.8);
+        transform: scale(1.15);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      color: #00cfff;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #a0d8f1;
+      margin-top: 0.5rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 207, 255, 0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0,207,255,0.3);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #00cfff;
+    }
+
+    .card p {
+      color: #d8f9ff;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+
+    <div class="pulse-container">
+      <div class="orb"></div>
+      <h1>Sodaro Intelligence API</h1>
+      <p class="subtitle">Where behavioral finance meets real-time intelligence</p>
+    </div>
+
+    <div class="cards" id="cards">
+      <!-- Feature cards will be injected here -->
+    </div>
+  </div>
+
+  <script>
+    const features = [
+      {
+        title: "Behavioral Data Analysis",
+        description:
+          "Tracks market news, behavior, and economic trends to forecast movements using sentiment analysis and financial reports.",
+      },
+      {
+        title: "Goal-Oriented Trading",
+        description:
+          "Set your financial goal, and Sodaro adapts trading strategies to your risk tolerance and timeline.",
+      },
+      {
+        title: "Capital Gain Management",
+        description:
+          "Monitors your trades to optimize and grow your capital gains within your timeframe.",
+      },
+      {
+        title: "Automated Syncing",
+        description:
+          "Syncs with your trading accounts to analyze and trade in real time using custom strategies.",
+      },
+      {
+        title: "Tax Optimization",
+        description:
+          "Minimizes tax on your gains by evaluating tax strategies, losses, and trade structures.",
+      },
+      {
+        title: "AI Market Insight Engine",
+        description:
+          "Like a smart search engine — constantly analyzes global data to update your strategy dynamically.",
+      },
+    ];
+
+    const cardsContainer = document.getElementById("cards");
+
+    features.forEach((feature) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3>${feature.title}</h3>
+        <p>${feature.description}</p>
+      `;
+      cardsContainer.appendChild(card);
+    });
+  </script>
+</body>
+</html>
