@@ -781,6 +781,63 @@ h2 {
 
 
 
-/* Mobile-friendly: Enable dropdown on click */
+.sodaro-hero {
+  background: #043246;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 80px 20px 60px;
+  text-align: center;
+}
 
+.sodaro-title {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
 
+.sodaro-logo {
+  max-width: 500px;
+  width: 90%;
+  height: auto;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.3));
+}
+
+.sodaro-tagline {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 30px;
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+.sodaro-logo {
+  max-width: 425px;
+  height: auto;
+  margin-bottom: 30px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.3));
+  will-change: transform, filter;
+}
+
+/* Glow + slight scale on hover */
+.sodaro-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
+  animation: pulseGlow 1.5s infinite alternate;
+}
+
+/* Pulse glow effect */
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.7));
+  }
+}
