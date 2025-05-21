@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHP x HTML — Powered by Sodaro</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d1117;
+      color: #f0f6fc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #00ffe5;
+      margin-bottom: 0.5rem;
+      animation: slideInDown 1s ease-out;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .btn-group {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      animation: slideUp 1.5s ease-in;
+    }
+
+    .btn {
+      padding: 0.8rem 1.6rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00ffe5, #007acc);
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s ease;
+      box-shadow: 0 5px 18px rgba(0, 255, 229, 0.2);
+    }
+
+    .btn:hover {
+      transform: scale(1.07);
+      background: linear-gradient(135deg, #00e0ff, #005d99);
+      box-shadow: 0 8px 24px rgba(0, 255, 229, 0.3);
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+      background: transparent;
+      border: 2px solid #00ffe5;
+      color: #00ffe5;
+      transition: 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #00ffe5;
+      color: #000;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #8b949e;
+      animation: fadeIn 3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>PHP + HTML Pro Build</h1>
+  <p>
+    This fully mobile-friendly page proves my skills in <strong>ExpressionEngine CMS (PHP)</strong> and clean, animated <strong>HTML/CSS</strong> — designed with the Sodaro aesthetic.
+  </p>
+
+  <div class="btn-group">
+    <a class="btn" href="https://khmerxbxboi.github.io/Sodaro_Showcase/" target="_blank">Static HTML Version</a>
+    <a class="btn" href="https://khmerxbxboi.wuaze.com/" target="_blank">Dynamic PHP Version</a>
+
+  </div>
+
+  <a class="btn back-btn" href="https://www.jayaproduction.com">&larr; Back to Portfolio</a>
+
+  <footer>
+    &copy; 2025 Bullimalinna Sot — Sodaro Initiative. All Rights Reserved.
+  </footer>
+</body>
+</html>
